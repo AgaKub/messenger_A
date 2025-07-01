@@ -549,3 +549,56 @@ unread_count = sum(1 for msg in messages if not msg['read'])
 # Wyświetlanie informacji
 print(f"Liczba wiadomości: {len(messages)} (Nieprzeczytane: {unread_count})\n")
 ```
+
+
+
+### Moja część (A)
+
+Skupiam się na logice aplikacji:
+
+- Projektowanie **modeli Django** (wiadomości, rozmowy, użytkownicy)
+- Tworzenie **widoków API** do obsługi wiadomości
+- Planowanie systemu szyfrowania (późniejsze wdrożenie)
+- Wstępne testy jednostkowe
+
+---
+
+### Struktura projektu (na tym etapie)
+
+messenger_project/
+│
+├── messenger/ # Aplikacja Django
+│ ├── models.py # Wiadomości, rozmowy
+│ ├── views.py # Widoki API
+│ ├── urls.py # Routing
+│ └── serializers.py # Obsługa danych do/od API
+│
+├── messenger_project/ # Ustawienia Django
+│ ├── settings.py
+│ └── urls.py
+│
+├── manage.py
+└── README.md
+
+
+###  Jak uruchomić lokalnie
+
+```bash
+# krok 1 – migracje
+python manage.py makemigrations  
+python manage.py migrate
+
+# krok 2 – uruchomienie serwera
+python manage.py runserver
+
+
+Plan dalszych kroków, ewentualnie
+dodanie prostego szyfrowania wiadomości 
+
+testowanie endpointów API 
+
+stworzenie prostego frontendu (Grzesiek?)
+
+bsługa wątków, kilku rozmów, użytkowników
+
+
