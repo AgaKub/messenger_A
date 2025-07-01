@@ -556,10 +556,10 @@ print(f"Liczba wiadomości: {len(messages)} (Nieprzeczytane: {unread_count})\n")
 
 Skupiam się na logice aplikacji:
 
-- Projektowanie **modeli Django** (wiadomości, rozmowy, użytkownicy)
-- Tworzenie **widoków API** do obsługi wiadomości
-- Planowanie systemu szyfrowania (późniejsze wdrożenie)
-- Wstępne testy jednostkowe
+1.Projektowanie **modeli Django** (wiadomości, rozmowy, użytkownicy)
+2.Tworzenie **widoków API** do obsługi wiadomości
+3.Planowanie systemu szyfrowania (późniejsze wdrożenie)
+4.Wstępne testy jednostkowe
 
 ---
 
@@ -594,11 +594,75 @@ python manage.py runserver
 
 Plan dalszych kroków, ewentualnie
 dodanie prostego szyfrowania wiadomości 
-
 testowanie endpointów API 
-
 stworzenie prostego frontendu (Grzesiek?)
-
 bsługa wątków, kilku rozmów, użytkowników
 
 
+# Plan pracy nad projektem Django Secure Messenger
+kolejne etapy pracy nad wspólnym projektem komunikatora z szyfrowaniem. Każdy etap zawiera konkretne cele i narzędzia. Dokumentacja jest uzupełniana na bieżąco wraz z postępem prac.
+
+---
+
+### Etap 1 – Inicjalizacja projektu Django
+    Cel: Utworzenie struktury projektu Django
+1. Inicjalizacja projektu:
+   ```bash
+        django-admin startproject messenger_project .
+2. Utworzenie aplikacji:
+    bash
+        python manage.py startapp messenger
+3. Rejestracja aplikacji messenger w settings.py:
+    INSTALLED_APPS = [
+        ...
+        'messenger',
+    ]
+4. Pierwsze uruchomienie serwera:
+    bash
+        python manage.py runserver
+    
+    
+### 2 – Tworzenie logiki backendu
+    Cel: Zbudowanie podstawowej logiki komunikatora (bez frontendu)
+
+1. Definicja modeli w models.py:
+    1.1.UserProfile
+    1.2.Message
+    1.3.Conversation (opcjonalnie, jeśli rozmowy mają być grupowane)
+
+2. Stworzenie migracji:
+    bash
+        python manage.py makemigrations
+        python manage.py migrate
+3. Utworzenie pliku serializers.py do obsługi danych z/do API
+
+4. Utworzenie widoków w views.py:
+    4.1 lista wiadomości
+    4.2 wysyłanie wiadomości
+
+5. Dodanie ścieżek w urls.py
+
+6. Testowanie lokalne przez przeglądarkę lub Postmana
+
+
+###3 – Szyfrowanie wiadomości
+    Cel: Zabezpieczenie treści wiadomości
+1.Wybór algorytmu (symetryczne lub asymetryczne szyfrowanie)
+2.Utworzenie folderów keys/private i keys/public
+3.Zapis i odczyt kluczy dla użytkowników
+4.Szyfrowanie wiadomości przed zapisem
+5.Deszyfrowanie przy odczycie
+
+
+### 4 – Frontend (opcjonalnie)
+    Cel: Dodanie interfejsu użytkownika
+Opcje:
+    1. Front w Django (klasyczne widoki i szablony)
+    2. Lub prosta wersja konsolowa (na potrzeby testów)
+
+
+### 5 – Testy i refaktoryzacja
+    Cel: Uporządkowanie projektu i zapewnienie stabilności
+1. Pisanie testów jednostkowych
+2.Refaktoryzacja kodu
+3.Przygotowanie do ewentualnego wdrożenia
