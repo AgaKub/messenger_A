@@ -2,79 +2,78 @@
 
 Komentarz wstępny:  
 Ten plik zawiera moją osobistą dokumentację procesu tworzenia aplikacji. Aby poprawnie zrozumieć etapy i sposób pracy, uwzględniam również logikę działania na poziomie konsoli. Moja wersja dokumentacji przedstawia projekt krok po kroku — jako całościowy plan aplikacji opartej na Django z przyszłym systemem szyfrowania.
-
----
-
-## Etap 1 – Inicjalizacja projektu Django
-
-Cel: Utworzenie szkieletu projektu Django
-
-Wykonane kroki:
-- django-admin startproject messenger_project
-- python manage.py startapp messenger
-- Rejestracja aplikacji `messenger` w `settings.py`
-- Utworzenie pliku `projekt-dokumentacja.md` (ta wersja to równoległy dokument: `projekt-dokumentacja-aga.md`)
-
----
-
-## Etap 2 – Modele i baza danych
-
-Cel: Zbudowanie struktury danych
-
-Plany:
-1. Model użytkownika
-2. Model wiadomości
-3. Model rozmowy (thread)
-4. Relacje między nimi
-5. Migracje (makemigrations, migrate)
-
----
-
-## Etap 3 – API (widoki, routing, serializacja)
-
-Cel: Udostępnienie danych przez API
-
-Plany:
-1. Widoki typu APIView lub ViewSet
-2. Serializery (MessageSerializer, UserSerializer)
-3. Routing w urls.py
-4. Testowanie endpointów (np. w Postmanie)
-
----
-
-## Etap 4 – Szyfrowanie wiadomości
-
-Cel: Zabezpieczenie danych użytkownika
-
-Plany:
-1. Wybór algorytmu (symetryczne lub asymetryczne)
-2. Obsługa kluczy (foldery keys/private/ i keys/public/)
-3. Zapisywanie i odczyt kluczy użytkowników
-4. Szyfrowanie wiadomości przed zapisem
-5. Deszyfrowanie przy odczycie
-
----
-
-## Etap 5 – Frontend (opcjonalny)
-
-Cel: Dodanie interfejsu użytkownika
-
-Opcje:
-1. Frontend oparty na Django (klasyczne widoki i szablony HTML)
-2. Prosty frontend konsolowy na potrzeby testów
-
----
-
-## Etap 6 – Testy i refaktoryzacja
-
-Cel: Uporządkowanie projektu i zapewnienie stabilności
-
-Zadania:
-1. Pisanie testów jednostkowych (np. dla modeli i widoków)
-2. Refaktoryzacja kodu
-3. Przygotowanie do ewentualnego wdrożenia
-
----
-
-Uwaga końcowa:  
 Dokument ten ma być moją logiczną mapą projektu — pisaną moim językiem. Jeśli okaże się, że Grzesiek lepiej rozumie projekt inaczej, możemy pracować równolegle na dwóch wersjach dokumentacji i zsynchronizować się w dowolnym momencie.
+
+# Secure Messenger – wersja Django
+
+## 1. Wprowadzenie
+
+- **Nazwa projektu**: Secure Messenger – wersja Django  
+- **Cel**: Przeniesienie komunikatora z wersji konsolowej do webowej, z zachowaniem szyfrowania wiadomości.  
+- **Mój wkład**: Dokumentacja krok po kroku, porządkowanie logiki projektu, przygotowanie do dalszego rozwoju.  
+- **Dlaczego ten projekt**: Chcę pokazać, jak uczę się strukturalnie i dokumentuję myślenie, nie tylko efekt końcowy.
+
+## 2. Środowisko i instalacja
+
+- **Wersja Pythona**: 3.x  
+- **Wirtualne środowisko**: utworzone lokalnie, aktywowane przez `venv`  
+- **Instalacja bibliotek**:
+
+pip install django cryptography
+
+- **Struktura folderów projektu**:
+messenger/
+├── config/ # konfiguracja Django
+├── keys/ # klucze szyfrujące
+├── messages/ # wiadomości
+├── test/ # pliki testowe
+├── .idea/ # pliki środowiskowe IDE
+├── config.py # główna konfiguracja aplikacji
+├── crypto.py # moduł szyfrowania
+├── message_manager.py # obsługa wiadomości
+├── user_manager.py # zarządzanie użytkownikami
+└── secure_messenger.py # wersja konsolowa
+
+
+## 3. Logika projektu
+
+- Komunikator szyfruje wiadomości, umożliwia przesyłanie i odczyt tylko autoryzowanym użytkownikom.  
+- **Moduły**:
+- `crypto.py`: generowanie i ładowanie kluczy, szyfrowanie/odszyfrowywanie
+- `message_manager.py`: logika obsługi wiadomości (dodawanie, lista, odszyfrowanie)
+- `user_manager.py`: zarządzanie użytkownikami
+- **Szyfrowanie**: oparte na bibliotece `cryptography`, używa kluczy `.key` przechowywanych lokalnie  
+- **Plany rozwoju**: rozbudowa o backend Django i interfejs webowy
+
+## 4. Etapy migracji (konsola → Django)
+
+- Początkowa wersja to skrypt konsolowy z szyfrowaniem wiadomości
+- Migracja objęła:
+- przeniesienie logiki do aplikacji Django
+- uporządkowanie plików i podział na foldery
+- wstępne przygotowanie do integracji z interfejsem webowym
+- **Optymalizacje**:
+- Rozdzielenie ról plików
+- Uproszczenie logiki dodawania wiadomości
+
+## 5. Mój sposób dokumentowania
+
+- Prowadzę **własną dokumentację**: wersja krok po kroku, aby nie zginąć w chaosie podczas nauki  
+- **Język dokumentacji**: logiczny, strukturalny, oparty na pytaniach typu: *co robi ten plik?*, *co testuje ta metoda?*, *czy to działa niezależnie?*  
+- **Dlaczego osobna wersja**:
+- Każdy myśli trochę inaczej – zachowuję porządek dostosowany do mojego stylu pracy
+- Chcę zostawić ślad procesu nauki, nie tylko gotowy efekt
+
+## 6. Plany na rozwój
+
+- Rejestracja i logowanie użytkownika
+- Interfejs webowy z listą wiadomości
+- Historia rozmów i baza danych
+- Uwierzytelnianie i kontrola dostępu
+- Testy jednostkowe i integracyjne
+- Wersja demo do testów z użytkownikiem
+
+---
+
+> _Dokumentacja prowadzona przez Agnieszke Kubczak w ramach nauki Django i bezpiecznego przesyłania danych w aplikacjach webowych._
+
